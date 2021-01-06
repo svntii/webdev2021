@@ -15,30 +15,71 @@
     font-style: normal;
 
 }
-
 h1 {
     font-family: "get_schwiftyregular";
     font-size: 36px;
     color: #69C8ECFF; 
 }
-
 .petName{
     padding: 5px;
     background-color: #526E2DFF;
 }
-
 .description{
     padding: 2px;
     background-color:#69C8ECFF ;
+}
+.main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.petArea{
+    background-color: rgb(148, 255, 27);
+    justify-items: center;
+}
+.petImage{
+    height: 300px;
+    max-width: 100%;
+    padding: 32px;
+}
+.statsArea{
+    background-color: yellow;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    
+}
+.activityIcon{
+    width: 60px;
+    height: 60px;
+}
+.activityRow{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90%;
+}
+.activityButton{
+    background-color: magenta;
+    border-radius: 9px;
+    box-shadow: 0 0 4px 0 grey;
+    font-weight: bold;
+    cursor: pointer;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    
 }
 </style>
 </head>
 
 <body>
+    
     <div class="header"></div>
+        
         <div class="petName"> 
-            <h1> Mr. Meseeks </h1>
+            <h1> Mr. Meeseeks </h1>
         </div>
+        
         <div class="description"> 
             <h3> Meeseeks are creatures who are created to serve a singular purpose for which they will go to any
                 length to fulfill. After they serve their purpose, they expire and vanish into the air. 
@@ -46,9 +87,32 @@ h1 {
                 the only way to be removed from existence is to complete the task they were called to perform.
                 First appeared S1 E5 <a href="https://www.thewatchcartoononline.tv/rick-and-morty-episode-5-meeseeks-and-destroy"> "Meeseeks and Destroy"</a> </h3>
         </div>
-    <div class="main"></div>
-    <div class="petArea"></div>
-    <div class="statsArea"></div>
+
+    <div class="main">
+        
+        <div class="petArea">
+            <img class="petImage" src="neutral.png"/>
+
+        </div>
+        
+        <div class="statsArea">
+            <div class="activityRow"> 
+                <img class="activityIcon" src="MeeseekFood.jpg">
+                <div class="activityStat">100</div>
+                <div class="activityButton"> Eat Pringles</div>
+            </div>
+            <div class="activityRow"> 
+                <img class="activityIcon" src="flask.jpg">
+                <div class="activityStat">50</div>
+                <div class="activityButton">Drink flask</div>
+            </div>
+            <div class="activityRow">
+                <img class="activityIcon" src="running.jpg">
+                <div class="activityStat">75</div>
+                <div class="activityButton">Complete task</div>
+            </div>
+        </div>
+    </div>
 </body>
 
 
