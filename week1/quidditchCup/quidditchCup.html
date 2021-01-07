@@ -34,41 +34,81 @@
         visibility: hidden;
         transition: 0.5s transform;
       }
+
+      #snitch {
+        position: absolute;
+        background-image: url("imgs/snitch.png");
+        background-size: 100% 100%;
+        width: 32px;
+        height: 32px;
+        visibility: hidden;
+        transition: 0.5s transform;
+      }
     </style>
 </head>
 
 <body>
     <h1>Quidditch Cup </h1>
-    <h2> Version 1.0 </h2>
+    <h2> Version 2.0 </h2>
     <p> The object of the game is to score more points, obvious isn't it. It is not like golf.</p>
 
     <h2>Rules</h2>
     <ol>
         <li>Clicking on the  <span class="brown"> Quaffle </span> earns <b> 10 pts</b>. </li>
+        <li>Clicking on the <span class="gold">Golden Snitch</span> earns <b>150 points</b> and <b>ends the game</b>.</li>
         <li> To start over refresh your browser </li>
     </ol>
     <h3>Score: <span id="scoreboard"> No Score Yet </span></h3>
+    <h3>Time Remaining: <span id="timer">15</span></h3>
+
 
     <button onclick="startGame()">New Game</button>
 
     <div id="gameboard">
-      <div id="quaffle"></div>
+      <div id="quaffle" onclick="scoreQuaffle()"></div>
+      <div id="snitch" onclick="scoreSnitch()"></div>
     </div>
 
     <script>
       // All of our JavaScript will be written inside this script tag.
 
       var score = 0;
-      var scoreboard = document.getElementById("scoreboard");
+      var gameboard = document.getElementById("gameboard");
       var quaffle = document.getElementById("quaffle");
-      var quaffleSpeed = 1500;
-      var quaffleTimeout = null;
+      var snitch = document.getElementById("snitch");
+      var scoreboard = document.getElementById("scoreboard");
+      var timer = document.getElementById("timer");
 
+      var secondsRemaining = 0;
+
+      var quaffleTimeoutID = null;
+      var snitchTimeoutID = null;
+      var secondsRemainingTimeoutID = null;
+      var gameTimeoutID = null;
+
+      var quaffleSpeed = 1500; // speed in Milliseconds.
+      var snitchSpeed = 1000; // speed in Milliseconds.
+      var gameLength = 15000; // gameLength in milliseconds.
+      
+      
+      
       function startGame() {
           score = 0;
+          timer = 15;
           scoreboard.innerHTML = score;
+          timer.innerHTML = timer;
+
+          gameTimeoutID = setTimeout(endGame, gameLength); 
+          secondsRemaining = gameLength / 1000;
+          updateSecondsRemaining();
+
 
           quaffle.style.visibility = "visible";
+          snitch.style.visibility = "visible";
+
+          
+          moveQuaffle();
+          moveSnitch();         
       }
           
       function moveQuaffle() {
@@ -83,12 +123,56 @@
       clearTimeout(quaffleTimeoutID)
   
       // Move the Quaffle after so many seconds.
-      quaffleTimeoutID = setTimeout(moveQuaffle, quaffleSpeed); // Note: we keep track of this timer by storing it in the quaffleTimeoutID variable in case we need to cancel the movement later.
+      quaffleTimeoutID = setTimeout(moveQuaffle, quaffleSpeed); 
       }
 
-      
+        function moveSnitch() {
 
+          let randY = Math.floor(Math.random() * 468 + 1); 
+          let randX = Math.floor(Math.random() * 468 + 1);
 
+          snitch.style.transform = `translate(${randX}px, ${randY}px)`; 
+
+          clearTimeout(snitchTimeoutID)
+  
+         snitchTimeoutID = setTimeout(moveSnitch, snitchSpeed); 
+         }
+
+      function scoreQuaffle() {
+        score = score + 10;
+        scoreboard.innerHTML = score;
+        clearTimeout(quaffleTimeoutID);
+        moveQuaffle();
+
+      }
+
+      function scoreSnitch() {
+        score = score + 150
+        scoreboard.innerHTML = score;
+        endGame();
+      }
+
+      function endGame() {
+        clearInterval(quaffleTimeoutID);
+        clearInterval(snitchTimeoutID);
+        clearInterval(secondsRemainingTimeoutID);
+        clearInterval(gameTimeoutID);
+
+        secondsRemaining = 0;
+        timer.innerHTML = secondsRemaining;
+
+        quaffle.style.visibility = "hidden";
+        snitch.style.visibility = "hidden";
+      }
+
+      function updateSecondsRemaining() {
+        timer.innerHTML = secondsRemaining;
+
+        if (secondsRemaining > 0) {
+          secondsRemaining = secondsRemaining - 1;
+          secondsRemainingTimeoutID = setTimeout(updateSecondsRemaining, 1000);
+        }
+      }
     </script>
   </body>
 </html>
