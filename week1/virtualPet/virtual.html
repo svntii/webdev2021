@@ -69,6 +69,40 @@ h1 {
     justify-items: center;
     
 }
+#food{
+    visibility: hidden;
+}
+#water{
+    visibility: hidden;
+}
+#exercise{
+    visibility: hidden;
+}
+
+.startButton{
+    background-color: magenta;
+    border-radius: 9px;
+    box-shadow: 0 0 4px 0 grey;
+    font-weight: bold;
+    cursor: pointer;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    visibility: visible;
+}
+.restartButton{
+    background-color: magenta;
+    border-radius: 9px;
+    box-shadow: 0 0 4px 0 grey;
+    font-weight: bold;
+    cursor: pointer;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    visibility: hidden;
+}
 </style>
 </head>
 
@@ -91,28 +125,34 @@ h1 {
     <div class="main">
         
         <div class="petArea">
-            <img class="petImage" src="neutral.png"/>
+            <img class="petImage" id="petImage" src="neutral.png"/>
 
         </div>
         
         <div class="statsArea">
             <div class="activityRow"> 
                 <img class="activityIcon" src="MeeseekFood.jpg">
-                <div class="activityStat">100</div>
-                <div class="activityButton"> Eat Pringles</div>
+                <div class="activityStat" id="food">100</div>
+                <div class="activityButton" onclick="giveFood()"> Eat Pringles</div>
             </div>
             <div class="activityRow"> 
                 <img class="activityIcon" src="flask.jpg">
-                <div class="activityStat">50</div>
-                <div class="activityButton">Drink flask</div>
+                <div class="activityStat" id="water">50</div>
+                <div class="activityButton" onclick="giveWater()" >Drink flask</div>
             </div>
             <div class="activityRow">
                 <img class="activityIcon" src="running.jpg">
-                <div class="activityStat">75</div>
-                <div class="activityButton">Complete task</div>
+                <div class="activityStat" id="exercise">75</div>
+                <div class="activityButton" onclick="giveExercise()">Complete task</div>
             </div>
         </div>
+
+        <div class="startButton" id="start" onclick="startGame()"> Start Game </div>
+        <div class="restartButton" id="restart" onclick="restartGame()"> Restart Game </div>
     </div>
+
+    <script src="virtual.js"></script>
+
 </body>
 
 
