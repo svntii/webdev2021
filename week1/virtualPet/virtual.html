@@ -57,6 +57,17 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     width: 90%;
 }
+
+#rowFood{
+    visibility: hidden;
+}
+#rowWater{
+    visibility: hidden;
+}
+#rowExercise{
+    visibility: hidden;
+}
+
 .activityButton{
     background-color: magenta;
     border-radius: 9px;
@@ -69,16 +80,6 @@ h1 {
     justify-items: center;
     
 }
-#food{
-    visibility: hidden;
-}
-#water{
-    visibility: hidden;
-}
-#exercise{
-    visibility: hidden;
-}
-
 .startButton{
     background-color: magenta;
     border-radius: 9px;
@@ -101,6 +102,12 @@ h1 {
     display: grid;
     align-items: center;
     justify-items: center;
+    visibility: hidden;
+}
+.hidden{
+    display: none;
+}
+#endGameMessage{
     visibility: hidden;
 }
 </style>
@@ -130,26 +137,32 @@ h1 {
         </div>
         
         <div class="statsArea">
-            <div class="activityRow"> 
+            <div class="activityRow" id="rowFood"> 
                 <img class="activityIcon" src="MeeseekFood.jpg">
-                <div class="activityStat" id="food">100</div>
+                <div class="activityStat" id="food">50</div>
                 <div class="activityButton" onclick="giveFood()"> Eat Pringles</div>
             </div>
-            <div class="activityRow"> 
+            <div class="activityRow" id="rowWater"> 
                 <img class="activityIcon" src="flask.jpg">
                 <div class="activityStat" id="water">50</div>
                 <div class="activityButton" onclick="giveWater()" >Drink flask</div>
             </div>
-            <div class="activityRow">
+            <div class="activityRow" id="rowExercise">
                 <img class="activityIcon" src="running.jpg">
-                <div class="activityStat" id="exercise">75</div>
+                <div class="activityStat" id="exercise">50</div>
                 <div class="activityButton" onclick="giveExercise()">Complete task</div>
             </div>
         </div>
 
         <div class="startButton" id="start" onclick="startGame()"> Start Game </div>
-        <div class="restartButton" id="restart" onclick="restartGame()"> Restart Game </div>
     </div>
+    <div class="endGame" id="end-game">
+    
+        <div class="restartButton" id="restart" onclick="restartGame()"> Restart Game </div>
+        <div class="message" id="endGameMessage"> <h1> Mr.Meeseeks has completed a task </h1></div>
+    </div>
+
+
 
     <script src="virtual.js"></script>
 

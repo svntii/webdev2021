@@ -5,27 +5,45 @@ var water = document.getElementById("water")
 var exercise = document.getElementById("exercise")
 var start = document.getElementById("start")
 var restart = document.getElementById("restart")
+var hasNotPassedOut = true
 
 //function
+
 function startGame(){
     console.log("started game")
     
-    food.style.visibility = "visible";
-    water.style.visibility = "visible";
-    exercise.style.visibility = "visible";
+    rowFood.style.visibility = "visible"
+    rowWater.style.visibility = "visible"
+    rowExercise.style.visibility = "visible"
+ 
 
     food = 50
     water = 50
     exercise = 50    
     
     start.style.visibility = "hidden";
-    restart.style.visibility = "visible";
+    
+    setInterval(agePet,2000)
 }
 
-function restart(){
+function restartGame(){
     console.log("restarted game");
 
-}
+    rowFood.style.visibility = "visible"
+    rowWater.style.visibility = "visible"
+    rowExercise.style.visibility = "visible"
+
+    restart.style.visibility = "hidden";
+    endGameMessage.style.visibility = "hidden";
+
+    food = 50
+    water = 50
+    exercise = 50
+
+    hasNotPassedOut = true
+    toggleInteractivity()
+    updateHTML()     
+  }
 
 function giveFood() {
     console.log("Fed Meeseeks")
@@ -45,9 +63,9 @@ function giveWater(){
 
 function giveExercise(){
     console.log("Meeseeks did task")
-    food = food + 15
+    food = food - 15
     water = water - 5
-    exercise = exercise +30
+    exercise = exercise + 30
     updateHtml();
 }
 
@@ -56,11 +74,16 @@ function updateHtml() {
     document.getElementById("water").innerHTML = water
     document.getElementById("exercise").innerHTML = exercise
 
-    var lowestNum = Math.min(food, water, exercise)
+    var lowestStat = Math.min(food, water, exercise)
     var imgSrc
     
     if (lowestStat <= 0) {
         imageSrc = 'passedOut.gif'
+        if (hasNotPassedOut) {
+          toggleInteractivity()
+          hasNotPassedOut = false
+          toggleInteractivity()
+        }
       } else if (lowestStat < 25) {
         imageSrc = 'tired.gif'
       } else if (lowestStat < 75) {
@@ -83,4 +106,13 @@ function agePet(){
     updateHtml();
 }
 
-setInterval(agePet,2000)
+function toggleInteractivity() {
+  console.log("Mr.Meeseeks has died")
+
+    rowFood.style.visibility = "hidden"
+    rowWater.style.visibility = "hidden"
+    rowExercise.style.visibility = "hidden"
+
+    restart.style.visibility = "visible";
+    endGameMessage.style.visibility = "visible";
+}
