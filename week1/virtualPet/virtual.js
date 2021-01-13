@@ -42,7 +42,7 @@ function restartGame(){
 
     hasNotPassedOut = true
     toggleInteractivity()
-    updateHTML()     
+    updateHtml()     
   }
 
 function giveFood() {
