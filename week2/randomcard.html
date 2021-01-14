@@ -40,7 +40,15 @@
         deck.push(sixOfDiamonds);
 
         function pickRandomCard(){
-            
+           var rand = Math.random()
+           var round = rand * 3
+           var randomIndex = Math.round(round)
+           var randomCard = deck[randomIndex]
+           var displayString = randomCard.value + " of " + randomCard.suit
+
+           document.getElementById('display').innerHTML = displayString
+
+           console.log(randomIndex)
         }
 
 

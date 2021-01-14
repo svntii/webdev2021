@@ -17,6 +17,28 @@
     var arr = [6,8,10,12]
     console.log(arr)
 
+
+    var num1 = 0
+    var num2 = 1
+    var counter = 0
+
+    while (counter <= 5) {
+
+        var oldNum = num2 
+        num2 = num1 + num2
+        num1 = oldNum
+
+        counter += 1
+    }
+
+
+
+    console.log(num2)
+
+
+
+
+
 </script>
 
 </html>
