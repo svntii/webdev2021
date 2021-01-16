@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Build A Deck</title>
+    </head>
+
+    <body>
+
+    </body>
+
+    <script>
+        function buildDeck() {
+            var newDeck = []
+            var value = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+            var suit = ['hearts', 'spades', 'diamonds', 'clubs']
+
+            suit.forEach((suit) => {
+                console.log(suit)
+                    value.forEach((value) => {
+                        console.log(value)
+            })
+            })
+
+            var card = {
+                suit : suit,
+                value : value,
+            }
+
+            newDeck.push(card)
+
+
+            return newDeck
+        }
+
+        var deck = buildDeck()
+
+        console.log(deck)
+
+    </script>
+</html>

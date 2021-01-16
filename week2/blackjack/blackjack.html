@@ -1,40 +1,54 @@
 <!DOCTYPE html>
-
 <html>
+    <head>
 
-<head>
+    </head>
 
+    <body>
 
-</head>
+    </body>
 
+    <script>
+        var deck
+        
+        function buildDeck(){
+            var newDeck = []
+            var suit = ['spades', 'diamonds', 'clubs', 'hearts']
+            var value = [1,2,3,4,5,6,7,8,9,10,11,12,13]
 
-<body>
+            suit.forEach((suit) => {
+                console.log(suit)
+                    value.forEach((value) => {
+                        console.log(value)
+                    })
+            })
 
-
-
-</body>
-
-
-
-
-<script>
-
-    var suits = ['spades', 'diamonds', 'hearts', 'clubs']
-    var val = [1,2,3,4,5,6,7,8,9,10,11,12,13]
-
-    suits.forEach((suitVal)) => {
-        values.forEach((valueVal)) => {
             var card = {
-                suit : suitVal,
-                value : valueVal,
-            }   
+                suit : suit,
+                value : value,
+            }
 
-            deck.push(card)
+            newDeck.push(deck)
+
+            return newDeck
         }
-    }
 
-    console.log(card)
+        var shuffle = (deck) => {
+            var sortFunc = (card1, card2) => {
+                var result
+                
+                
+                if (Math.random()>.5){
+                    result = 1
+                } else {
+                    result = -1
+                }
+                return result
+            }
+                deck.sort(sortFunc)
+                return deck
+        }
 
-</script>
-
+        console.log(deck)
+    </script>
 </html>
