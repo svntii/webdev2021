@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hot dogs == sandwiches?</title>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    </head>
+    <body>
+        <h1 id="hotDogOutput">Hot dog status:</h1>
+        <input type="textfield" id="latestHotDogStatus"/>
+        <button onclick="saveData()" id="saveButton">Save</button>
+        <button onclick="loadData()" id="loadButton"> Load </button>
+
+        <!--Unlike the video tutorial, we are keeping all our javascript inline in our html file.-->
+        <script>
+
+            // Replace with your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyCySy5JLV49dhGHNL1nMqFn8r1gXMdCpC8",
+                authDomain: "webdevbootcamp2021.firebaseapp.com",
+                projectId: "webdevbootcamp2021",
+                storageBucket: "webdevbootcamp2021.appspot.com",
+                messagingSenderId: "157678090450",
+                appId: "1:157678090450:web:b80e071b1854205907d50b"
+                };
+
+            // Initialize our application
+            firebase.initializeApp(firebaseConfig);
+            var firestore = firebase.firestore();
+
+            var docRef = firestore.doc("sample/sandwichdata")
+            var outputEle = document.getElementById("hotDogOutput")
+            var inputEle = document.getElementById("latestHotDogStatus")
+            var saveButton = document.getElementById("saveButton")
+            var loadButton = document.getElementById("loadButton")
+
+            
+            var saveData = () => {
+                var textToSave = inputEle.value
+                
+                var dataToSave = {
+                    hotDogStatus: textToSave
+                }
+                docRef.set(dataToSave)
+            }
+            
+            var loadData = ()=> {
+                docRef.get().then((doc) => {
+                    var myData = doc.data()
+                    if (myData!== undefined){
+                        outputEle.innerHTML = "Hot dog status: " +  myData.hotDogStatus
+                    }
+                })
+            }
+            
+            function getRealTimeUpdates(){
+                docRef.onSnapshot((dog) =>{
+                    var myData = doc.data()
+                    if (myData !== undefined){
+                        outputEle.innerHTML = "Hot dog status: " + myData.hotDogStatus
+                    }
+                })
+            }
+            
+            getRealTimeUpdates()
+
+        </script>
+    </body>
+</html>
